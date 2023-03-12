@@ -1,0 +1,20 @@
+int goldhack = 0; 
+
+
+int (*old_Gold)(void *instance);
+int Money(void *instance) {
+    if (instance != NULL && goldhack) {
+        return (int) 999999999;
+    }
+    return old_Gold(instance);
+}
+ 
+
+HOOK_LIB("libil2cpp.so", "0x1A98728", Money, old_Gold);
+
+OBFUSCATE("0_Toggle_Coin"),
+
+
+case 0:       
+            goldhack = boolean;
+            break;  
